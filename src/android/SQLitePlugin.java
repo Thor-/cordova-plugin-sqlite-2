@@ -211,10 +211,10 @@ public class SQLitePlugin extends CordovaPlugin {
     SQLiteDatabase database = DATABASES.get(name);
     if (database == null) {
       if (":memory:".equals(name)) {
-        database = SQLiteDatabase.openOrCreateDatabase(name, null, SQLiteDatabase.OPEN_READWRITE | SQLiteDatabase.NO_LOCALIZED_COLLATORS);
+        database = SQLiteDatabase.openDatabase(name, null, SQLiteDatabase.OPEN_READWRITE | SQLiteDatabase.CREATE_IF_NECESSARY | SQLiteDatabase.NO_LOCALIZED_COLLATORS);
       } else {
         File file = new File(cordova.getActivity().getFilesDir(), name);
-        database = SQLiteDatabase.openOrCreateDatabase(file, null, SQLiteDatabase.OPEN_READWRITE | SQLiteDatabase.NO_LOCALIZED_COLLATORS);
+        database = SQLiteDatabase.openDatabase(file, null, SQLiteDatabase.OPEN_READWRITE | SQLiteDatabase.CREATE_IF_NECESSARY | SQLiteDatabase.NO_LOCALIZED_COLLATORS);
       }
       DATABASES.put(name, database);
     }
